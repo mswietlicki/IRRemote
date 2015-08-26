@@ -5,12 +5,12 @@ Use sample:
 -----------
 
 ```c
-	#include "IRRemoteMicrolab.h"
+#include "IRRemoteMicrolab.h"
 
-	IRRemoteMicrolab speakersRemote(D1);
+IRRemoteMicrolab speakersRemote(D1);
 
-	void loop() {
-		speakersRemote.SendCommand("VOLUP");
-		sleep(500);
-	}
+void loop() {
+	speakersRemote.SendCommand("VOLUP");
+	sleep(500);
+}
 ```
