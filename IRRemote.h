@@ -12,9 +12,6 @@
 class IRRemote
 {
   const int irPin;
-  int burstWait;
-  int burstLength;
-
 public:
   IRRemote(int irPin);
   void setup(int freq, int nbits, int hdr_mark, int hdr_space, int bit_mark, int one_space, int zero_space);
@@ -23,8 +20,7 @@ private:
   void enableIROut(int khz);
   void mark(int usec);
   void space(int usec);
-  int _freq, _nbits, _hdr_mark, _hdr_space, _bit_mark, _one_space, _zero_space;
-
+  int _burstWait, _burstLength, _freq, _nbits, _hdr_mark, _hdr_space, _bit_mark, _one_space, _zero_space;
 };
 
 #define TOPBIT 0x80000000

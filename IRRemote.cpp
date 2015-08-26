@@ -27,7 +27,7 @@ void IRRemote::send(unsigned long data) {
     if (data & TOPBIT) {
       mark(_bit_mark);
       space(_one_space);
-    } 
+    }
     else {
       mark(_bit_mark);
       space(_zero_space);
@@ -41,16 +41,16 @@ void IRRemote::send(unsigned long data) {
 void IRRemote::mark(int time) {
   // Sends an IR mark (frequency burst output) for the specified number of microseconds.
   noInterrupts();
-  
+
   while (time > 0) {
     digitalWrite(irPin, HIGH); // this takes about 3 microseconds to happen
-    delayMicroseconds(burstWait);
+    delayMicroseconds(_burstWait);
     digitalWrite(irPin, LOW); // this also takes about 3 microseconds
-    delayMicroseconds(burstWait);
- 
-    time -= burstLength;
+    delayMicroseconds(_burstWait);
+
+    time -= _burstLength;
   }
-  
+
   interrupts();
 }
 
@@ -70,7 +70,7 @@ void IRRemote::enableIROut(int khz) {
   // This is the time to wait with the IR LED on and off to make the frequency, in microseconds.
   // The - 3.0 at the end is because digitalWrite() takes about 3 microseconds. Info from:
   // https://github.com/eflynch/sparkcoreiremitter/blob/master/ir_emitter/ir_emitter.ino
-  burstWait = round(1.0 / khz * 1000.0 / 2.0 - 3.0);
+  _burstWait = round(1.0 / khz * 1000.0 / 2.0 - 3.0);
   // This is the total time of a period, in microseconds.
-  burstLength = round(1.0 / khz * 1000.0);
+  _burstLength = round(1.0 / khz * 1000.0);
 }
